@@ -1,57 +1,68 @@
 package com.model;
 
 public class Performance {
-	private int performanceId;
-	private int presentDays;
-    private int absentDays;
-    private String overtimePeriod;
-    private double efficiency;
-	public Performance(int performanceId,int presentDays, int absentDays, String overtimePeriod, double efficiency) {
-		super();
-		this.setPerformanceId(performanceId);
-		this.presentDays = presentDays;
-		this.absentDays = absentDays;
-		this.overtimePeriod = overtimePeriod;
-		this.efficiency = efficiency;
+	//Work Done By Priyankka
+	private int performance_id;
+	private int present_days;
+	private int absent_days;
+	private String overtime_period;
+	private int efficiency;
+	private int employee_id;
+	public int getPerformance_id() {
+		return performance_id;
 	}
-	public Performance() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setPerformance_id(int performance_id) {
+		this.performance_id = performance_id;
 	}
-	public int getPresentDays() {
-		return presentDays;
+	public int getPresent_days() {
+		return present_days;
 	}
-	public void setPresentDays(int presentDays) {
-		this.presentDays = presentDays;
+	public void setPresent_days(int present_days) {
+		this.present_days = present_days;
 	}
-	public int getAbsentDays() {
-		return absentDays;
+	public int getAbsent_days() {
+		return absent_days;
 	}
-	public void setAbsentDays(int absentDays) {
-		this.absentDays = absentDays;
+	public void setAbsent_days(int absent_days) {
+		this.absent_days = absent_days;
 	}
-	public String getOvertimePeriod() {
-		return overtimePeriod;
+	public String getOvertime_period() {
+		return overtime_period;
 	}
-	public void setOvertimePeriod(String overtimePeriod) {
-		this.overtimePeriod = overtimePeriod;
+	public void setOvertime_period(String overtime_period) {
+		this.overtime_period = overtime_period;
 	}
-	public double getEfficiency() {
+	public int getEfficiency() {
 		return efficiency;
 	}
-	public void setEfficiency(double efficiency) {
+	public void setEfficiency(int efficiency) {
 		this.efficiency = efficiency;
 	}
-	public int getPerformanceId() {
-		return performanceId;
+	public int getEmployee_id() {
+		return employee_id;
 	}
-	public void setPerformanceId(int performanceId) {
-		this.performanceId = performanceId;
+	public void setEmployee_id(int employee_id) {
+		this.employee_id = employee_id;
+	}
+	public Performance(int performance_id, int present_days, int absent_days, String overtime_period, int efficiency,
+			int employee_id) {
+		super();
+		this.performance_id = performance_id;
+		this.present_days = present_days;
+		this.absent_days = absent_days;
+		this.overtime_period = overtime_period;
+		this.efficiency = efficiency;
+		this.employee_id = employee_id;
+	}
+	public Performance() {
+		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
-		return "Performance [performanceId=" + performanceId + ", presentDays=" + presentDays + ", absentDays="
-				+ absentDays + ", overtimePeriod=" + overtimePeriod + ", efficiency=" + efficiency + "]";
+		return "Performance [performance_id=" + performance_id + ", present_days=" + present_days + ", absent_days="
+				+ absent_days + ", overtime_period=" + overtime_period + ", efficiency=" + efficiency + ", employee_id="
+				+ employee_id + "]";
 	}
 	
+
 }

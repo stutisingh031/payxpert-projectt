@@ -49,9 +49,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			int presentDays = rst.getInt("present_days");
 			int absentDays = rst.getInt("absent_days");
 			String overtimePeriod = rst.getString("overtime_period");
-			double efficiency = rst.getDouble("efficiency");
-			Performance performance = new Performance(performanceId, presentDays, absentDays, overtimePeriod,
-					efficiency);
+			int efficiency = rst.getInt("efficiency");
+			int employee_id = rst.getInt("employee_id");
+			Performance performance = new Performance(performanceId, presentDays, absentDays, overtimePeriod,efficiency,employee_id);
 			list.add(performance);
 		}
 		DBConnection.dbClose();
@@ -69,10 +69,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		List<Payroll> list = new ArrayList<>();
 		while (rst.next() == true) {
 			int payId = rst.getInt("payroll_id");
+			String startdate = rst.getString("payPeriodStartDate");
+			String enddate = rst.getString("payPeriodEndDate");
 			double deductions = rst.getDouble("deductions");
-			double basicSalary = rst.getDouble("basic_salary");
-			double netSalary = rst.getDouble("net_salary");
-			Payroll payroll = new Payroll(payId, basicSalary, deductions, netSalary);
+			double basicSalary = rst.getDouble("basicSalary");
+			double netSalary = rst.getDouble("netSalary");
+			double overtimepay = rst.getDouble("overtimePay");
+			double employee_id = rst.getDouble("employee_id");
+			
+			Payroll payroll = new Payroll(payId,startdate,enddate, deductions,basicSalary, netSalary,overtimepay,employee_id);
 			list.add(payroll);
 		}
 		DBConnection.dbClose();
@@ -111,6 +116,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return 0;
 	}
+
+	@Override
+	public boolean findOne(double employee_id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 
 	
 

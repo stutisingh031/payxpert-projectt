@@ -21,4 +21,6 @@ public interface EmployeeDao {
 
 	int findEmpByUser(int user_id) throws SQLException , EmployeeNotFoundException;
 
+	boolean findOne(double employee_id);
+
 }

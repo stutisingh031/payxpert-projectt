@@ -6,7 +6,6 @@ import java.util.List;
 import com.dao.EmployeeDao;
 import com.dao.EmployeeDaoImpl;
 import com.exception.EmployeeNotFoundException;
-
 import com.model.Employee;
 import com.model.Payroll;
 import com.model.Performance;
@@ -33,9 +32,14 @@ public class EmployeeService {
 		return employeeDao.getAllPerformanceByEmployeeId(id);
 	}
 
-	public int findEmpByUser(int user_id) throws SQLException{
+	public int findEmpByUser(int user_id) throws SQLException, EmployeeNotFoundException{
 		// TODO Auto-generated method stub
 		return employeeDao.findEmpByUser(user_id) ;
+	}
+
+	public List<Employee> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

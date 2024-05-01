@@ -26,7 +26,7 @@ public class PayrollService {
 		//artistId validation
 		boolean isEmployeeIdValid = employeeDao.findOne(payroll.getEmployee_id());
 		if(!isEmployeeIdValid)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Employee Id Invalid");
 		
 	
 		dao.save(payroll);

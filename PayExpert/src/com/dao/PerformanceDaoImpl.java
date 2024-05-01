@@ -12,7 +12,7 @@ import com.dto.HighEfficiencyLowSalaryEmployeesDto;
 import com.dto.HighestEfficiencyDto;
 import com.dto.PerformanceDto;
 import com.model.Performance;
-import com.utility.dbconnection;
+import com.utility.DBConnection;
 
 public class PerformanceDaoImpl implements PerformanceDao {
 	//Work Done By Priyankka
@@ -20,7 +20,7 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	@Override
 	public int save(Performance performance) throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = "INSERT INTO Performance (performance_id,present_days,absent_days,overtime_period,efficiency,employee_id)" + " values(?,?,?,?,?,?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		
@@ -31,53 +31,53 @@ public class PerformanceDaoImpl implements PerformanceDao {
 		pstmt.setInt(5, performance.getEfficiency());
 		pstmt.setInt(6, performance.getEmployee_id());
 		int status = pstmt.executeUpdate();
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return status;
 	}
 
 	@Override
 	public void deleteById(int id) throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = "delete from Performance where performance_id =?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		
 		pstmt.setInt(1,id);
 		pstmt.executeUpdate();
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		
 	}
 
 	@Override
 	public boolean findOne(int id) throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = "Select performance_id from performance where performance_id =?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1,id);
 		ResultSet rst = pstmt.executeQuery();
 		boolean status = rst.next();
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return status;
 	}
 
 	@Override
 	public void softDeleteById(int id) throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = "update performance SET isActive='no' where performance_id =?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		
 		pstmt.setInt(1,id);
 		pstmt.executeUpdate();
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		
 	}
 
 	@Override
 	public List<Performance> findAll() throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = "select * from performance where isactive='yes'";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rst = pstmt.executeQuery();
@@ -92,14 +92,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
 			Performance performance = new Performance(id,present_days,absent_days,overtime_period,efficiency,employee_id);
 			list.add(performance);
 		}
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return list;
 	}
 
 	@Override
 	public List<PerformanceDto> retrieveEmployeesWithLowEfficiency() throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = "SELECT e.name, e.email, p.efficiency "
 				+ " FROM performance p "
 				+ " JOIN employee e on e.employee_id = p.employee_id "
@@ -114,14 +114,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
 			PerformanceDto performancedto = new PerformanceDto(name,email,efficiency);
 			list.add(performancedto);
 		}
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return list;
 	}
 
 	@Override
 	public List<AverageOvertimeDto> avgOvertimeHoursPerPosition() throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = " select e.position,avg(p.overtime_period) as avg_overtime_period "
 				+ " from employee e join performance p on e.employee_id = p.employee_id "
 				+ " group by e.position ";
@@ -134,14 +134,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
 			AverageOvertimeDto averageOvertimeDto = new AverageOvertimeDto(position,avg_overtime_period);
 			list.add(averageOvertimeDto);
 		}
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return list;
 	}
 
 	@Override
 	public List<HighestEfficiencyDto> findEmployeesWithHighestEfficiency() throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = " select e.name,e.position,p.efficiency "
 				+ " from employee e join performance p on e.employee_id = p.employee_id "
 				+ " where p.efficiency = (select max(efficiency) from performance) ";
@@ -155,14 +155,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
 			HighestEfficiencyDto highestEfficiencyDto = new HighestEfficiencyDto(name,position,efficiency);
 			list.add(highestEfficiencyDto);
 		}
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return list;
 	}
 
 	@Override
 	public List<HighEfficiencyLowSalaryEmployeesDto> findHighEfficiencyLowSalaryEmployees() throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = " select e.name, e.position, pe.efficiency, pr.net_salary "
 				+ " from employee e join performance pe on e.employee_id = pe.employee_id "
 				+ " join payroll pr on e.employee_id = pr.employee_id "
@@ -178,14 +178,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
 			HighEfficiencyLowSalaryEmployeesDto highEfficiencyLowSalaryEmployeesDto = new HighEfficiencyLowSalaryEmployeesDto(name,position,efficiency,net_salary);
 			list.add(highEfficiencyLowSalaryEmployeesDto);
 		}
-		dbconnection.dbClose();
+		DBConnection.dbClose();
 		return list;
 	}
 
 	@Override
 	public List<Performance> displayEmployeePerformance(int employee_id) throws SQLException {
 		// TODO Auto-generated method stub
-		Connection con = dbconnection.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql="select * from performance p join employee e ON p.employee_id=e.employee_id  "
 				+ " where e.employee_id = ? AND p.isactive='yes'";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -202,14 +202,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
 			Performance performance = new Performance(id,present_days,absent_days,overtime_period,efficiency,employee_Id);
 			list.add(performance);
 		}
-		dbconnection.dbClose();		
+		DBConnection.dbClose();		
 		return list;
 	}
 
 	public Performance findById(int employee_id) throws SQLException {
 		// TODO Auto-generated method stub
 		Performance performance = null;
-	    Connection con = dbconnection.dbConnect();
+	    Connection con = DBConnection.dbConnect();
 	    String sql = " SELECT efficiency,present_days FROM Performance WHERE employee_id =? ";
 	    PreparedStatement pstmt = con.prepareStatement(sql);
 	    pstmt.setInt(1, employee_id);
@@ -219,7 +219,7 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	        performance.setEfficiency(rst.getInt("efficiency"));
 	        performance.setPresent_days(rst.getInt("present_days"));
 	    }
-	    dbconnection.dbClose();
+	    DBConnection.dbClose();
 	    return performance;
 	}
 

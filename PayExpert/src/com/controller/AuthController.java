@@ -41,11 +41,11 @@ public class AuthController {
 						// load customer menu
 						System.out.println("=====ADMIN(HR) MENU=====");
 						System.out.println("Welcome " + username);
-						UserController.adminMenu();
+						HRController.adminMenu();
 					} else {
-						System.out.println("--------EMPLOYEE MENU--------");
+						System.out.println("=====EMPLOYEE MENU=====");
 						System.out.println("Welcome " + username);
-						// EmployeeController.employeeMenu();
+						//EmployeeController.employeeMenu();
 					}
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());

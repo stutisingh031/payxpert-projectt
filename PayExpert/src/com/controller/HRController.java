@@ -69,7 +69,12 @@ public class HRController {
 				break;
 			}
 		}
-		sc.close();
+		//sc.close();
+	}
+   public static void adminMenu() {
+		String[] sarry = {""};
+		main(sarry);
+		
 	}
 }
 

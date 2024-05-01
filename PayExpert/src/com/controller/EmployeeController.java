@@ -75,8 +75,10 @@ public class EmployeeController {
 
 		sc.close();
 	}
-	public static void employeeMenu(User  user) {
+		public static void employeeMenu(User  user) {
 		String args[] = {" "}; 
 		main (args, user);
 	}
+	
+	
 }

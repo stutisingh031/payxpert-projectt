@@ -1,4 +1,4 @@
-package com.exceptions;
+package com.exception;
 
 public class InvalidCredentialsException extends Exception{
 	private String message; 

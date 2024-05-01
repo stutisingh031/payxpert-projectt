@@ -10,14 +10,15 @@ import com.model.Performance;
 import com.model.Tax;
 
 public interface EmployeeDao {
-	
-	List<Tax>getAllTaxesByEmployeeId(int id) throws SQLException;
-	boolean findOne(int id)throws SQLException;
-	
-	List<Performance>getAllPerformanceByEmployeeId(int id) throws SQLException;
-	List<Payroll>getAllPayrollByEmployeeId(int id) throws SQLException;
-	int save(Employee  employee) throws SQLException;
-	void deleteById(int id) throws SQLException,EmployeeNotFoundException;
-	void softDeleteById(int id) throws SQLException,EmployeeNotFoundException;
-	List<Employee> findAll() throws SQLException;
+
+	List<Tax> getAllTaxesByEmployeeId(int id) throws SQLException;
+
+	boolean findOne(int id) throws SQLException;
+
+	List<Performance> getAllPerformanceByEmployeeId(int id) throws SQLException;
+
+	List<Payroll> getAllPayrollByEmployeeId(int id) throws SQLException;
+
+	int findEmpByUser(int user_id) throws SQLException , EmployeeNotFoundException;
+
 }

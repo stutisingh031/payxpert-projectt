@@ -1,10 +1,11 @@
 package com.dao;
-import com.utility.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import com.model.User;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.model.User;
+import com.utility.DBConnection;
 
 
 
@@ -12,7 +13,7 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public int store(User user) throws SQLException {
-		Connection con = DBConnect.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql = " Insert into User(User_id, UserName, Password, Role) values (?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, user.getUser_id());
@@ -20,14 +21,14 @@ public class UserDaoImpl implements UserDao{
 		ps.setString(3, user.getPassword());
 		ps.setString(4, user.getRole());
 		int status = ps.executeUpdate();
-		DBConnect.dbClose();
+		DBConnection.dbClose();
 		return status;
 	}
 	 //override
 
 	@Override
 	public User login(String username, String password, String role) throws SQLException {
-		Connection con = DBConnect.dbConnect();
+		Connection con = DBConnection.dbConnect();
 		String sql="select * from user where username=? AND password=? AND role=?";
 		//prepare the statement 
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -42,11 +43,11 @@ public class UserDaoImpl implements UserDao{
 			user.setUsername(username);
 			user.setPassword(password);
 			user.setRole(role);
-			DBConnect.dbClose();
+			DBConnection.dbClose();
 			return user;
 		}
 		else {
-			DBConnect.dbClose();
+			DBConnection.dbClose();
 			return null; 
 		}
 	}

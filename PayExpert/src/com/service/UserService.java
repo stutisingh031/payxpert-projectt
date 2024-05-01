@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.dao.UserDao;
 import com.dao.UserDaoImpl;
-import com.exceptions.InvalidCredentialsException;
+import com.exception.InvalidCredentialsException;
 import com.model.User;
 
 public class UserService {

@@ -1,4 +1,4 @@
-package com.exceptions;
+package com.exception;
 
 public class TaxCalculationException extends Exception{
 private String message; 

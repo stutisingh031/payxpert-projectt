@@ -32,28 +32,16 @@ public class EmployeeService {
 		// TODO Auto-generated method stub
 		return employeeDao.getAllPerformanceByEmployeeId(id);
 	}
-	public int insert(Employee employee) throws SQLException {
-		return employeeDao.save(employee);
-	}
-	public void deleteByid(int id) throws SQLException, EmployeeNotFoundException {
-		boolean isIdValid = employeeDao.findOne(id);
-		if(!isIdValid)
-			throw new EmployeeNotFoundException("Id given is Invalid!!");
-		 
-		employeeDao.deleteById(id);
-	}
-	public void softDeleteByid(int id) throws EmployeeNotFoundException, SQLException {
-		boolean isIdValid = employeeDao.findOne(id);
-		if(!isIdValid)
-			throw new EmployeeNotFoundException("Id given is Invalid!!");
-		 
-		employeeDao.softDeleteById(id);
-		
+
+	public int findEmpByUser(int user_id) throws SQLException{
+		// TODO Auto-generated method stub
+		return employeeDao.findEmpByUser(user_id) ;
 	}
 	
-	public List<Employee> findAll() throws SQLException {
-		return employeeDao.findAll();
-	}
+	
+	
+	
+	
 
 	
 }

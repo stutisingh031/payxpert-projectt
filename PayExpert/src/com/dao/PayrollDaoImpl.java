@@ -14,7 +14,7 @@ import com.utility.DBConnection;
 public class PayrollDaoImpl implements PayrollDao {
 	
 	@Override
-	public  double  save(Payroll payroll) throws SQLException {
+	public  boolean  save(Payroll payroll) throws SQLException {
 		// insert artist record in DB
 		Connection con = DBConnection.dbConnect();
 		String sql="INSERT INTO payroll(payroll_id, PayPeriodStartDate, PayPeriodEndDate, BasicSalary,Deductions,OvertimePay,employee_id) "
@@ -33,7 +33,7 @@ public class PayrollDaoImpl implements PayrollDao {
 		
 		
 		//execute the query 
-	    double  status = pstmt.executeUpdate(); //1: if all good., 0 - if op fails 
+	    boolean  status = pstmt.executeUpdate()==1?true:false; //1: if all good., 0 - if op fails 
 		DBConnection.dbClose();
 		return status;		
 	}

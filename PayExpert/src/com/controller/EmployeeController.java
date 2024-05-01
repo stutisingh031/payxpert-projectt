@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.exception.EmployeeNotFoundException;
 import com.model.Payroll;
 import com.model.Performance;
 import com.model.Tax;
@@ -22,22 +23,25 @@ public class EmployeeController {
 			System.out.println("0. To Exit");
 			System.out.println("Enter: ");
 
-		//	int empId = employeeService.findEmpByUser( user.getUser_id());
 			int input = sc.nextInt();
 			if (input == 0) {
 				System.out.println("Exiting Employee Module..");
 				break;
 			}
-
-			int empId = 2;
+			int employeeId = -1;
+			try {
+				employeeId = employeeService.findEmpByUser(user.getUser_id());
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			} catch (EmployeeNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
 
 			switch (input) {
 			case 1:
 
-				List<Performance> performance;
 				try {
-
-					performance = employeeService.showPerformance(empId);
+					List<Performance> performance = employeeService.showPerformance(employeeId);
 					for (Performance p : performance)
 						System.out.println(p);
 				} catch (SQLException p) {
@@ -50,7 +54,7 @@ public class EmployeeController {
 
 				List<Tax> taxes;
 				try {
-					taxes = employeeService.showTaxes(empId);
+					taxes = employeeService.showTaxes(employeeId);
 					for (Tax t : taxes)
 						System.out.println(t);
 				} catch (SQLException e) {
@@ -61,7 +65,7 @@ public class EmployeeController {
 			case 3:
 
 				try {
-					List<Payroll> payroll = employeeService.showPayroll(empId);
+					List<Payroll> payroll = employeeService.showPayroll(employeeId);
 					for (Payroll p : payroll)
 						System.out.println(p);
 
@@ -73,10 +77,11 @@ public class EmployeeController {
 			}
 		}
 
-		sc.close();
+		//sc.close();
 	}
-	public static void employeeMenu(User  user) {
-		String args[] = {" "}; 
-		main (args, user);
+
+	public static void employeeMenu(User u) {
+		String args[] = { " " };
+		main(args, u);
 	}
 }

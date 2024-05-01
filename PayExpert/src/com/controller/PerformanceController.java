@@ -1,4 +1,5 @@
 package com.controller;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
@@ -18,11 +19,11 @@ public class PerformanceController {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//Work Done by Priyankka
+		// Work Done by Priyankka
 		Scanner sc = new Scanner(System.in);
 		PerformanceService performanceService = new PerformanceService();
 		EmployeeService employeeService = new EmployeeService();
-		while(true) {
+		while (true) {
 			System.out.println("1. Insert Performance ");
 			System.out.println("2. Delete Performance ");
 			System.out.println("3. De-Activate Performance ");
@@ -32,52 +33,54 @@ public class PerformanceController {
 			System.out.println("7. Employees of Highest Efficiency");
 			System.out.println("8. Employees of efficiency greater but with low salary");
 			System.out.println("9. Display performance of employee using employee id (Accessible by employee)");
-			//System.out.println("10.Remarks on performance");
+			System.out.println("10. Sort Employee on the basis of Efficiency");
+			// System.out.println("10.Remarks on performance");
 			System.out.println("Press 0 to exit");
 			int input = sc.nextInt();
 			if (input == 0) {
 				System.out.println("You are welcome. Exited successfully");
 				break;
 			}
-			switch(input) {
+			switch (input) {
 			case 1:
-				
+
 				try {
-					//creating obj for performance
+					// creating obj for performance
 					Performance performance = new Performance();
-					//creating id for the performance data
+					// creating id for the performance data
 					Random random = new Random();
 					int randomNumber = random.nextInt();
-					int id = randomNumber < 0 ? randomNumber*-1 : randomNumber;
+					int id = randomNumber < 0 ? randomNumber * -1 : randomNumber;
 					performance.setPerformance_id(id);
 
-					//read present days and assigning it to performance obj
+					// read present days and assigning it to performance obj
 					System.out.println("Enter the number of days present");
 					performance.setPresent_days(sc.nextInt());
-					
-					//reading absent days and assigning it to performance obj
+
+					// reading absent days and assigning it to performance obj
 					System.out.println("Enter the number of days absent");
 					performance.setAbsent_days(sc.nextInt());
-					
-					//reading the overtime period the employees work and assigning it to performance obj
+
+					// reading the overtime period the employees work and assigning it to
+					// performance obj
 					System.out.println("Enter the number of hours the employee work over time");
 					sc.nextLine();
 					performance.setOvertime_period(sc.nextLine());
-					
-					//reading the efficiency of employee and assigning it to performance obj
+
+					// reading the efficiency of employee and assigning it to performance obj
 					System.out.println("Enter the rate of efficiency for the work");
 					performance.setEfficiency(sc.nextInt());
-					
-					//read it and assign it to performance obj
+
+					// read it and assign it to performance obj
 					System.out.println("Enter the Employee ID");
 					performance.setEmployee_id(sc.nextInt());
-					
+
 					int status = performanceService.save(performance);
-					if(status == 1)
+					if (status == 1)
 						System.out.println("Performance has been added to DB");
 					else
 						System.out.println("Insertion Failed");
-					
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
@@ -104,7 +107,7 @@ public class PerformanceController {
 				} catch (ResourceNotFoundException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
-				}catch (SQLException e) {
+				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
 				}
@@ -112,7 +115,7 @@ public class PerformanceController {
 			case 4:
 				try {
 					List<Performance> list = performanceService.findAll();
-					for(Performance p : list)
+					for (Performance p : list)
 						System.out.println(p);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -122,9 +125,9 @@ public class PerformanceController {
 			case 5:
 				try {
 					List<PerformanceDto> listperdto = performanceService.retrieveEmployeesWithLowEfficiency();
-					for(PerformanceDto p : listperdto) {
+					for (PerformanceDto p : listperdto) {
 						System.out.println(p);
-					}	
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
@@ -133,7 +136,7 @@ public class PerformanceController {
 			case 6:
 				try {
 					List<AverageOvertimeDto> listavg = performanceService.avgOvertimeHoursPerPosition();
-					for(AverageOvertimeDto avgdto : listavg) {
+					for (AverageOvertimeDto avgdto : listavg) {
 						System.out.println(avgdto);
 					}
 					listavg = performanceService.avgOvertimeHoursPerPosition();
@@ -141,12 +144,12 @@ public class PerformanceController {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
 				}
-				
+
 				break;
 			case 7:
 				try {
 					List<HighestEfficiencyDto> listeff = performanceService.findEmployeesWithHighestEfficiency();
-					for(HighestEfficiencyDto hed : listeff) {
+					for (HighestEfficiencyDto hed : listeff) {
 						System.out.println(hed);
 					}
 				} catch (SQLException e) {
@@ -156,8 +159,9 @@ public class PerformanceController {
 				break;
 			case 8:
 				try {
-					List<HighEfficiencyLowSalaryEmployeesDto> listhelse = performanceService.findHighEfficiencyLowSalaryEmployees();
-					for(HighEfficiencyLowSalaryEmployeesDto helse : listhelse) {
+					List<HighEfficiencyLowSalaryEmployeesDto> listhelse = performanceService
+							.findHighEfficiencyLowSalaryEmployees();
+					for (HighEfficiencyLowSalaryEmployeesDto helse : listhelse) {
 						System.out.println(helse);
 					}
 				} catch (SQLException e) {
@@ -170,7 +174,7 @@ public class PerformanceController {
 				int employee_id = sc.nextInt();
 				try {
 					List<Performance> list = performanceService.displayEmployeePerformance(employee_id);
-					for(Performance p : list) {
+					for (Performance p : list) {
 						System.out.println(p);
 					}
 				} catch (SQLException | ResourceNotFoundException e) {
@@ -183,7 +187,8 @@ public class PerformanceController {
 					Performance performance = new Performance();
 					System.out.println("Enter Employee ID");
 					int employeeid = sc.nextInt();
-					String level = performanceService.remarks(performance.getEfficiency(),performance.getPresent_days(),employeeid);
+					String level = performanceService.remarks(performance.getEfficiency(),
+							performance.getPresent_days(), employeeid);
 					System.out.println(level);
 				} catch (ResourceNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -195,11 +200,11 @@ public class PerformanceController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		}
 		sc.close();
-  
+
 	}
 
 }

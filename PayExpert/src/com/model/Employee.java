@@ -27,6 +27,11 @@ public class Employee {
 		this.terminationDate = terminationDate;
 		this.userId = userId;
 	}
+	public Employee(int empID, String name) {
+		// TODO Auto-generated constructor stub
+		this.employeeId = empID;
+		this.name = name;
+	}
 	public int getEmployee_id() {
 		return employeeId;
 	}
@@ -92,6 +97,10 @@ public class Employee {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", name=" + name + "]";
 	}
 	
 	

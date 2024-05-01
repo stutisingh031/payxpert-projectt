@@ -31,21 +31,18 @@ public class AuthController {
 					String password = sc.nextLine();
 					System.out.println("role");
 					String role = sc.nextLine();
-					/*
-					 * go to DB and check if this credentials are valid, if yes then return object
-					 */
 
 					User userObj = userService.login(username, password, role);
 
 					if (userObj.getRole().equalsIgnoreCase("HR")) {
 						// load customer menu
-						System.out.println("=====ADMIN(HR) MENU=====");
+						System.out.println("=====HR MENU=====");
 						System.out.println("Welcome " + username);
-						UserController.adminMenu();
+						HRController.menu();
 					} else {
 						System.out.println("--------EMPLOYEE MENU--------");
 						System.out.println("Welcome " + username);
-						// EmployeeController.employeeMenu();
+						EmployeeController.employeeMenu(userObj);
 					}
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());

@@ -34,12 +34,15 @@ public class EmployeeService {
 
 	public int findEmpByUser(int user_id) throws SQLException, EmployeeNotFoundException{
 		// TODO Auto-generated method stub
-		return employeeDao.findEmpByUser(user_id) ;
+		int id = employeeDao.findEmpByUser(user_id) ;
+		if(id==-1)
+			throw new EmployeeNotFoundException("Invalid User");
+		
+		return id;
 	}
 
-	public List<Employee> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> findAll()throws SQLException {	
+		return employeeDao.findAll();
 	}
 	
 	

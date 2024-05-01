@@ -1,6 +1,25 @@
 package com.model;
 
+import java.util.Objects;
+
 public class Performance {
+	@Override
+	public int hashCode() {
+		return Objects.hash(absent_days, efficiency, employee_id, overtime_period, performance_id, present_days);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Performance other = (Performance) obj;
+		return absent_days == other.absent_days && efficiency == other.efficiency && employee_id == other.employee_id
+				&& Objects.equals(overtime_period, other.overtime_period) && performance_id == other.performance_id
+				&& present_days == other.present_days;
+	}
 	//Work Done By Priyankka
 	private int performance_id;
 	private int present_days;

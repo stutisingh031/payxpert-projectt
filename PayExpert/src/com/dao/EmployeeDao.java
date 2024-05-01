@@ -23,4 +23,6 @@ public interface EmployeeDao {
 
 	boolean findOne(double employee_id);
 
+	List<Employee> findAll()throws SQLException;
+
 }

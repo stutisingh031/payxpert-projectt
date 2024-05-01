@@ -8,9 +8,7 @@ import com.model.Payroll;
 
 public interface PayrollDao {
 
-	
-
-	public double save(Payroll payroll) throws SQLException;
+	public boolean save(Payroll payroll) throws SQLException;
 
 	public List<PayrollDto> getPayrollStats();
 
@@ -26,4 +24,3 @@ public interface PayrollDao {
 
 	public double calculateOvertimePay();
 }
-	

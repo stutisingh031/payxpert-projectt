@@ -38,7 +38,11 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	@Override
 	public void deleteById(int id) throws SQLException {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		Connection con =  DBConnection.dbConnect();
+=======
+		Connection con = DBConnection.dbConnect();
+>>>>>>> eb732ce83a3cb6c00573269ad242e7f11bdce7a3
 		String sql = "delete from Performance where performance_id =?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		
@@ -78,7 +82,11 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	public List<Performance> findAll() throws SQLException {
 		// TODO Auto-generated method stub
 		Connection con = DBConnection.dbConnect();
+<<<<<<< HEAD
 		String sql = "select * from performance";
+=======
+		String sql = "select * from performance where isactive='yes'";
+>>>>>>> eb732ce83a3cb6c00573269ad242e7f11bdce7a3
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rst = pstmt.executeQuery();
 		List<Performance> list= new ArrayList<>();

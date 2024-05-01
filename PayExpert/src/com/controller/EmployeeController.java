@@ -79,9 +79,17 @@ public class EmployeeController {
 
 		//sc.close();
 	}
+<<<<<<< HEAD
 
 	public static void employeeMenu(User u) {
 		String args[] = { " " };
 		main(args, u);
+=======
+		public static void employeeMenu(User  user) {
+		String args[] = {" "}; 
+		main (args, user);
+>>>>>>> eb732ce83a3cb6c00573269ad242e7f11bdce7a3
 	}
+	
+	
 }

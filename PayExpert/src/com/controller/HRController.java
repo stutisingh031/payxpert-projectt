@@ -68,9 +68,16 @@ public class HRController {
 		}
 		//sc.close();
 	}
+<<<<<<< HEAD
 
 	public static void menu() {
 		String args[] = { " " };
 		main(args);
+=======
+   public static void adminMenu() {
+		String[] sarry = {""};
+		main(sarry);
+		
+>>>>>>> eb732ce83a3cb6c00573269ad242e7f11bdce7a3
 	}
 }
